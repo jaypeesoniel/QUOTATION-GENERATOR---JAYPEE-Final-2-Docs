@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Quotation Generator - Jaypee Soniel</title>
+  <style>
+    body { font-family: Cambria, serif; max-width: 600px; margin: 40px auto; padding: 10px; }
+    h2 { text-align: center; }
+    label { display:block; margin-top:15px; font-weight:bold; }
+    input, select, textarea {
+      width:100%; padding:8px; margin-top:5px;
+      font-family: Cambria, serif;
+      font-size: 14px;
+    }
+    button {
+      display:block; width:100%; margin-top:20px; padding:10px;
+      background-color:#0078d4; color:white; border:none;
+      border-radius:5px; font-size:16px; font-family:Cambria, serif;
+      cursor:pointer;
+    }
+    button:hover { background-color:#005fa3; }
+  </style>
+</head>
+<body>
+  <h2>Quotation Generator - Jaypee Soniel</h2>
+  <form method="post">
+    <label>Machine Model
+      <select name="model_name" required>
+        {% for model in models %}
+          <option value="{{model}}">{{model}}</option>
+        {% endfor %}
+      </select>
+    </label>
+
+    <label>Client Name
+      <input type="text" name="client_name" placeholder="YOUR CLIENT NAME" required>
+    </label>
+
+    <label>Address (one per line)
+      <textarea name="address" rows="3" placeholder="STREET&#10;BARANGAY&#10;CITY/MUNICIPALITY" required></textarea>
+    </label>
+
+    <label>Contact Person
+      <input type="text" name="contact_person" placeholder="CONTACT PERSON" required>
+    </label>
+
+    <button type="submit">Generate PDF</button>
+  </form>
+</body>
+</html>
