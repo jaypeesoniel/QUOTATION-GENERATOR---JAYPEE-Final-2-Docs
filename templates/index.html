@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Quotation Generator - Jaypee Soniel</title>
+  <style>
+    body { font-family: Arial; margin: 40px; }
+    label { display:block; margin-top:10px; }
+    input, textarea, select { width:100%; padding:8px; margin-top:5px; }
+    button { margin-top:20px; padding:10px 20px; background:#007bff; color:white; border:none; cursor:pointer; }
+    button:hover { background:#0056b3; }
+  </style>
+</head>
+<body>
+  <h2>📄 Generate Quotation - Jaypee Soniel</h2>
+  <form method="POST">
+    <label>Model:</label>
+    <select name="model_name" required>
+      {% for m in models %}
+      <option value="{{ m }}">{{ m }}</option>
+      {% endfor %}
+    </select>
+
+    <label>Client Name:</label>
+    <input type="text" name="client_name" required>
+
+    <label>Address:</label>
+    <textarea name="address" rows="3" required></textarea>
+
+    <label>Contact Person:</label>
+    <input type="text" name="contact_person" required>
+
+    <button type="submit">Generate PDF</button>
+  </form>
+</body>
+</html>
