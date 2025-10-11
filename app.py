@@ -2,7 +2,6 @@ import os
 from flask import Flask, render_template, request, send_file
 from docx import Document
 import tempfile
-import pypandoc
 
 app = Flask(__name__)
 
@@ -10,7 +9,7 @@ app = Flask(__name__)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 TEMPLATES_FOLDER = os.path.join(BASE_DIR, "quotation_templates")
 
-# Ensure na existing folder kahit sa Render
+# Ensure na existing folder kahit sa server
 os.makedirs(TEMPLATES_FOLDER, exist_ok=True)
 
 @app.route("/")
@@ -19,7 +18,8 @@ def index():
     models = []
     if os.path.exists(TEMPLATES_FOLDER):
         models = [f.replace(".docx", "") for f in os.listdir(TEMPLATES_FOLDER) if f.endswith(".docx")]
-    return render_template("index.html", models=models)
+    # ⚠️ Change to your actual HTML name (forms.html)
+    return render_template("forms.html", models=models)
 
 @app.route("/generate", methods=["POST"])
 def generate():
@@ -58,17 +58,10 @@ def generate():
     # Save temporary files
     with tempfile.TemporaryDirectory() as tmpdir:
         temp_docx = os.path.join(tmpdir, f"{client_name}_quotation.docx")
-        temp_pdf = os.path.join(tmpdir, f"{client_name}_quotation.pdf")
         doc.save(temp_docx)
 
-        # ✅ Convert DOCX → PDF using pypandoc (works on Render/Linux)
+        # ✅ Try to convert to PDF, fallback to DOCX if fails
         try:
-            pypandoc.convert_file(temp_docx, 'pdf', outputfile=temp_pdf, extra_args=['--standalone'])
-        except Exception as e:
-            print("PDF conversion failed:", e)
-            return f"Error converting to PDF: {e}"
-
-        return send_file(temp_pdf, as_attachment=True)
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=10000)
+            import pypandoc
+            temp_pdf = os.path.join(tmpdir, f"{client_name}_quotation.pdf")
+            pypa
