@@ -1,4 +1,4 @@
 Flask
 python-docx
-docx2pdf
+pypandoc
 gunicorn
