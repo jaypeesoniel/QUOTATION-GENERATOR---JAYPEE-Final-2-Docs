@@ -19,7 +19,7 @@ def index():
     if os.path.exists(TEMPLATES_FOLDER):
         models = [f.replace(".docx", "") for f in os.listdir(TEMPLATES_FOLDER) if f.endswith(".docx")]
     # ⚠️ Change to your actual HTML name (forms.html)
-    return render_template("forms.html", models=models)
+    return render_template("index.html", models=models)
 
 @app.route("/generate", methods=["POST"])
 def generate():
