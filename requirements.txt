@@ -1,4 +1,3 @@
 Flask
-python-docx
-pypandoc
+PyPDF2
 gunicorn

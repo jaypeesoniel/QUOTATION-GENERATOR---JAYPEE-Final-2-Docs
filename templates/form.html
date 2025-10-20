@@ -1,22 +1,102 @@
-<form action="/" method="POST">
-  <label>Client Name:</label>
-  <input type="text" name="client_name" required>
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Quotation Generator - Jaypee Soniel</title>
+  <style>
+    body {
+      font-family: Cambria, serif;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 10px;
+      background-color: #f5f6f7;
+    }
+    h2 {
+      text-align: center;
+      color: #222;
+      margin-bottom: 20px;
+    }
+    form {
+      background: white;
+      border-radius: 8px;
+      padding: 20px 25px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    label {
+      display:block;
+      margin-top:15px;
+      font-weight:bold;
+      color: #333;
+    }
+    input, select, textarea {
+      width:100%;
+      padding:8px;
+      margin-top:5px;
+      border:1px solid #ccc;
+      border-radius:4px;
+      font-family: Cambria, serif;
+      font-size:14px;
+      box-sizing:border-box;
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color:#0078d4;
+      outline:none;
+    }
+    button {
+      display:block;
+      width:100%;
+      margin-top:20px;
+      padding:10px;
+      background-color:#0078d4;
+      color:white;
+      border:none;
+      border-radius:5px;
+      font-size:16px;
+      font-family:Cambria, serif;
+      cursor:pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color:#005fa3;
+    }
+    footer {
+      text-align:center;
+      font-size:13px;
+      color:#555;
+      margin-top:20px;
+      font-family: Cambria, serif;
+    }
+  </style>
+</head>
+<body>
+  <h2>Quotation Generator - Jaypee Soniel</h2>
 
-  <label>Address:</label>
-  <textarea name="address" rows="3"></textarea>
+  <form method="post">
+    <label>Machine Model
+      <select name="model_name" required>
+        {% for model in models %}
+          <option value="{{model}}">{{model}}</option>
+        {% endfor %}
+      </select>
+    </label>
 
-  <label>Contact Person:</label>
-  <input type="text" name="contact_person">
+    <label>Client Name
+      <input type="text" name="client_name" placeholder="YOUR CLIENT NAME" required>
+    </label>
 
-  <label>Date:</label>
-  <input type="text" name="date" placeholder="e.g. October 11, 2025">
+    <label>Address (one per line)
+      <textarea name="address" rows="3" placeholder="STREET&#10;BARANGAY&#10;CITY/MUNICIPALITY" required></textarea>
+    </label>
 
-  <label>Template Model:</label>
-  <select name="model_name" required>
-    {% for model in models %}
-      <option value="{{ model }}">{{ model }}</option>
-    {% endfor %}
-  </select>
+    <label>Contact Person
+      <input type="text" name="contact_person" placeholder="CONTACT PERSON" required>
+    </label>
 
-  <button type="submit">Generate Quotation PDF</button>
-</form>
+    <button type="submit">Generate PDF</button>
+  </form>
+
+  <footer>
+    © {{ year }} Jaypee Soniel. All rights reserved.
+  </footer>
+</body>
+</html>
